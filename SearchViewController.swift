@@ -13,6 +13,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var searchText: UITextField!
     @IBOutlet var searchResultsTable: UITableView!
     
+    weak var delegate:  ViewController!
+    
     var searchResults: [Movie] = []
     
     @IBAction func search(sender: UIButton) {
@@ -21,6 +23,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if searchTerm.characters.count > 2 {
             retrieveMoviesByTerm(searchTerm: searchTerm)
         }
+    }
+    
+    @IBAction func addFav(sender: UIButton) {
+        self.delegate.favouriteMovies.append(searchResults[sender.tag])
     }
     
     func retrieveMoviesByTerm(searchTerm: String) {
